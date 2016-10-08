@@ -12,7 +12,13 @@ class HttpInfo(object):
         self.request = request_info
         self.response = response_info
         self.result = None
-
+    def extract_request(self,url,method,headers,body):
+        requests="%s %s HTTP/1.1\r\n"%(method,url)
+        for key,value in headers.items():
+            requests+="%s: %s\r\n"%(key,value)
+        if body:
+            requests+="\r\n%s"%body
+        return requests
     def get_info(self):
         # get url info
         urlparsed = urlparse(self.info.get('url'))
@@ -22,7 +28,8 @@ class HttpInfo(object):
             method=self.info.get('method'),
             url=self.info.get('url')
         )
-
+        print self.info
+        print self.request
         # get request info
         request_info = dict(
             request_url=self.request.uri,
@@ -45,8 +52,11 @@ class HttpInfo(object):
             url=url_info.get('url'),
             request=request_info,
             response=response_info,
+            request_orign=self.extract_request(url_info.get('url'),url_info.get('method'),self.request.headers,self.request.body),
             time=datetime.datetime.now(),
-            status=0
+            status=0,
+            types='passive',
+
         )
         pprint(self.result)
         return self.result

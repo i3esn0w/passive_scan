@@ -3,19 +3,19 @@ __author__ = 'hartnett'
 
 # mongodb 配置项
 db_info = dict(
-    host="127.0.0.1",
+    host="192.243.116.148",
     port=27017,
-    username="xsec",
-    password="x@xsec.io"
+    username="",
+    password=""
 )
 
 CONST_WHITE_DOMAINS = ['weibo.com', 'sina.com.cn', 'google.com', 'baidu.com', 'cnzz.com']
 
 CONST_REDIS = {
-    'host' : '127.0.0.1',
+    'host' : '192.243.116.148:6379',
     'port' : 6379,
     'db' : 1,
-    'password' : 'x@xsec.io'
+    'password' : ''
 }
 
 REDIS_SERVER = "redis://:%s@%s:%d/%d" % (
